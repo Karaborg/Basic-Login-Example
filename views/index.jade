@@ -1,0 +1,93 @@
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title Login
+    link(rel='stylesheet', href='/stylesheets/mycss.css')
+    //toaster
+    link(rel='stylesheet', href='/toastr/build/toastr.css')
+    // Tell the browser to be responsive to screen width
+    meta(content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no', name='viewport')
+
+    center
+      body
+        .backgroundMiddle
+          .container
+            .screen
+              h2.textWhite(style='font-size: 26px; margin-right: 10px;') Login
+              .screen
+                div
+                  h3.textWhite Username
+                    input.input#txtUsername
+                  h3.textWhite Password
+                    input.input#txtPassword
+                  button.button#btnLogin Login
+                  button.button#btnCreate Create User
+        .backgroundMiddle#table
+            .container
+              .screen
+                h2.textWhite(style='font-size: 26px; margin-right: 10px;') Create User
+                .screen
+                  div
+                    h3.textWhite Username
+                      input.input#txtCreateUsername
+                    h3.textWhite Password
+                      input.input#txtCreatePassword
+                    button.button#btnCreateUser Create This User
+    //jquery
+    script(src='https://code.jquery.com/jquery-3.3.1.min.js', integrity='sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=', crossorigin='anonymous')
+    //toaster
+    script(src='toastr/toastr.js')
+    script.
+      document.getElementById("table").style.display = "none";
+      $('#btnLogin').click(function (e) {
+        e.preventDefault();
+        var txtUsername = document.getElementById('txtUsername').value.trim();
+        var txtPassword = document.getElementById('txtPassword').value.trim();
+        if(txtUsername && txtPassword){
+          var data = {
+            username : txtUsername,
+            password : txtPassword
+          }
+          $.post('/btnLogin', data)
+              .done(function (returnValue) {
+                if(returnValue){
+                  toastr.info("Success");
+                  document.getElementById('txtUsername').value = "";
+                  document.getElementById('txtPassword').value = "";
+                }else{
+                  toastr.error("No User Found")
+                }
+              })
+        }else{
+          toastr.warning("Empty")
+        }
+      })
+      $('#btnCreate').click(function (e) {
+        e.preventDefault();
+        document.getElementById("table").style.display = "table";
+      })
+      $('#btnCreateUser').click(function (e) {
+        e.preventDefault();
+        var txtUsername = document.getElementById('txtCreateUsername').value.trim();
+        var txtPassword = document.getElementById('txtCreatePassword').value.trim();
+        if(txtUsername && txtPassword){
+          var data = {
+            username : txtUsername,
+            password : txtPassword
+          }
+          $.post('/btnCreate', data)
+              .done(function (returnValue) {
+                if(returnValue){
+                  toastr.info("Success");
+                  document.getElementById('txtCreateUsername').value = "";
+                  document.getElementById('txtCreatePassword').value = "";
+                  document.getElementById("table").style.display = "none";
+                }else{
+                  toastr.error("Fail")
+                }
+              })
+        }else{
+          toastr.warning("Empty")
+        }
+      })
