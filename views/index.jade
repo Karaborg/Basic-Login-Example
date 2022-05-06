@@ -18,7 +18,7 @@ html
               .screen
                 div
                   h3.textWhite Username
-                    input.input#txtUsername
+                    input.input#txtUsername(style="uppercase")
                   h3.textWhite Password
                     input.input#txtPassword
                   button.button#btnLogin Login
@@ -42,8 +42,8 @@ html
       document.getElementById("table").style.display = "none";
       $('#btnLogin').click(function (e) {
         e.preventDefault();
-        var txtUsername = document.getElementById('txtUsername').value.trim();
-        var txtPassword = document.getElementById('txtPassword').value.trim();
+        var txtUsername = document.getElementById('txtUsername').value.trim().toUpperCase();
+        var txtPassword = document.getElementById('txtPassword').value.trim().toUpperCase();
         if(txtUsername && txtPassword){
           var data = {
             username : txtUsername,
@@ -69,8 +69,8 @@ html
       })
       $('#btnCreateUser').click(function (e) {
         e.preventDefault();
-        var txtUsername = document.getElementById('txtCreateUsername').value.trim();
-        var txtPassword = document.getElementById('txtCreatePassword').value.trim();
+        var txtUsername = document.getElementById('txtCreateUsername').value.trim().toUpperCase();
+        var txtPassword = document.getElementById('txtCreatePassword').value.trim().toUpperCase();
         if(txtUsername && txtPassword){
           var data = {
             username : txtUsername,

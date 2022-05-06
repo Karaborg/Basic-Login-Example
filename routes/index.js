@@ -1,9 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-var async = require("async");
-var mongoose = require('mongoose');
-var database = require('../core/database.js');
 var model = require('../core/Model/model.js');
 
 /* GET home page. */
@@ -13,43 +10,40 @@ router.get('/', function(req, res, next) {
 
 router.post('/btnLogin',function (req, res) {
   var data = req.body;
-  console.log(data)
-  try {
-    model.list(function (response) {
-      for (let i = 0; i < response.accounts.length; i++) {
-        if (response.accounts[i].username === data.username && response.accounts[i].password === data.password) {
-          res.send(true)
-        }else{
-          res.send(false)
-        }
-      }
-    })
-  } catch (error) {
-    console.log("Login User Error: " + error)
-  }
+
+  model.findById(data.username, function (response) {
+    if(response.account != null && response.account.password === data.password){
+      res.send(true);
+    }else{
+      res.send(false);
+    }
+  });
+
 });
 
 router.post('/btnCreate',function (req, res) {
   var data = req.body;
-  console.log(data)
-  try {
+  console.log('HERE: ', data);
 
-    model.list(function (response) {
-      for (let i = 0; i < response.accounts.length; i++) {
-        if (response.accounts[i].username === data.username) {
-          res.send(false)
-        }else{
-          model.create(data, function(response){
-            res.send(true);
+  model.findById(data.username, function (response) {
+    if(response.success){
+      if(response.account == null){
+
+        model.create(data, function (response) {
+          if (response.success){
             console.log(response);
-          })
-        }
+            res.send('done');
+          } else{
+            console.log('Failed to add');
+          }
+        });
+      }else{
+        res.send('no');
+        console.log('Already have this!');
       }
-    })
-  } catch (error) {
-    console.log("Create User Error: " + error)
-    res.send(false)
-  }
+    }
+  });
+
 });
 
 module.exports = router;

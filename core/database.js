@@ -3,6 +3,8 @@
 var bluebird = require('bluebird');
 var mongoose = require('mongoose');
 
+require('dotenv').config();
+
 // Cache 50 queries for 30 minutes
 var cacheOptions = null;
 if (process.env.DEBUG) {
@@ -24,13 +26,18 @@ require('mongoose-cache').install(mongoose, cacheOptions);
 
 var connectFunction = function () {
 
-    var string = "mongodb+srv://test:test@cluster0-idaqf.mongodb.net/test?retryWrites=true&w=majority";
+    var rawConnectionString = process.env.ConnectionString;
+    var User = process.env.User;
+    var Password = process.env.Password;
+
+    var connectionString = rawConnectionString.replace('<username>', User);
+    connectionString = connectionString.replace('<password>', Password);
 
     // Using `mongoose.connect`...
-    var promise = mongoose.connect(string, {
+    var promise = mongoose.connect(connectionString, {
         /* other options */
-	       useNewUrlParser: true,
-	       useUnifiedTopology: true
+        useNewUrlParser: true,
+        useUnifiedTopology: true
     });
 
     promise.then(function(db) {
@@ -53,11 +60,11 @@ var connectFunction = function () {
             console.log('Connected to database.');
         });
 
-        console.log("DB connected");
+        console.log('DB connected');
     });
 
 };
 
 connectFunction();
 
-exports.User            = require('./Model/user')(mongoose);
+exports.user            = require('./Model/user')(mongoose);

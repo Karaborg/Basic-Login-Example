@@ -1,5 +1,5 @@
 /*jshint esversion: 6 */
-"use strict";
+'use strict';
 
 const schemaName = 'user';
 

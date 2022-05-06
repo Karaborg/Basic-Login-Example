@@ -1,4 +1,4 @@
-var User = require('../database.js').User;
+var User = require('../database.js').user;
 
 exports.create = function (params, callback) {
 
@@ -13,9 +13,11 @@ exports.create = function (params, callback) {
     });
 
 };
+
 exports.list = function (callback) {
     find({}, callback);
 };
+
 function find(query, callback) {
     User.find(query).exec(function (err, accounts) {
         if (err) {
@@ -25,3 +27,34 @@ function find(query, callback) {
         }
     });
 }
+
+exports.deleteById = function (id, callback) {
+    User.remove({username: id}, function (err) {
+        if (err) {
+            callback({success: false, error: err});
+        } else {
+            callback({success: true});
+        }
+    });
+};
+
+exports.findById = function (id, callback) {
+    User.findOne({username: id}, function (err, result) {
+        if(err){
+            callback({success:false, account:result});
+        }else{
+            callback({success:true, account:result});
+        }
+    });
+};
+
+
+
+
+
+
+
+
+
+
+
