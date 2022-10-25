@@ -6,6 +6,7 @@
   - Run Mongo
     - `docker run -d --rm --network <network> --name <mongoContainerName> -e MONGO_INITDB_ROOT_USERNAME=<dbUserName> -e   MONGO_INITDB_ROOT_PASSWORD=<dbPassword> mongo`
   - Configure MongoDB Variables
+    - `mkdir env/`
     - `echo 'MONGO_DB_USERNAME=<dbUserName>' >> ./env/.env`
     - `echo 'MONGO_DB_PASSWORD=<dbPassword>' >> ./env/.env`
   - Build Node Image
