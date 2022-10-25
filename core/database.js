@@ -28,7 +28,7 @@ var mongodb_connection_string = `mongodb://${process.env.MONGO_DB_USERNAME}:${pr
 
 var connectFunction = function () {
 
-    // Using `mongoose.connect`...      mongodb://myDBReader:D1fficultP%40ssw0rd@mongodb0.example.com:27017/?authSource=admin
+    // Using `mongoose.connect`...
     var promise = mongoose.connect(mongodb_connection_string, {
         /* other options */
         useNewUrlParser: true,

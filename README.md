@@ -23,3 +23,18 @@
     - `docker network rm <networkName>`
 
 > Port can be changed with `echo 'NODE_PORT=<port>' >> .env` command.
+
+## Start With ***Docker-Compose***
+
+- **To Start Application**
+  - Configure DB Connection Variables
+    - `echo 'MONGO_INITDB_ROOT_USERNAME=<dbUserName>' >> ./env/mongo.env`
+    - `echo 'MONGO_INITDB_ROOT_PASSWORD=<dbPassword>' >> ./env/mongo.env`
+    - `echo 'MONGO_DB_USERNAME=<dbUserName>' >> ./env/node.env`
+    - `echo 'MONGO_DB_PASSWORD=<dbPassword>' >> ./env/node.env`
+  - Start Application
+    - `docker compose up`
+- **To Stop Application**
+  - `docker compose down -v`
+  - Remove Volumes
+    - `docker image prune -a`
