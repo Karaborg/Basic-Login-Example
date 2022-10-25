@@ -12,3 +12,4 @@ package-lock.json
 
 # docker
 .dockerignore
+.docker-compose.yaml

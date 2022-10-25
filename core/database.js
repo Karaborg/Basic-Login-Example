@@ -24,17 +24,12 @@ mongoose.Promise = bluebird;
 
 require('mongoose-cache').install(mongoose, cacheOptions);
 
+var mongodb_connection_string = `mongodb://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@mongodb:27017/users?authSource=admin`
+
 var connectFunction = function () {
 
-    var rawConnectionString = process.env.ConnectionString;
-    var User = process.env.User;
-    var Password = process.env.Password;
-
-    var connectionString = rawConnectionString.replace('<username>', User);
-    connectionString = connectionString.replace('<password>', Password);
-
-    // Using `mongoose.connect`...
-    var promise = mongoose.connect(connectionString, {
+    // Using `mongoose.connect`...      mongodb://myDBReader:D1fficultP%40ssw0rd@mongodb0.example.com:27017/?authSource=admin
+    var promise = mongoose.connect(mongodb_connection_string, {
         /* other options */
         useNewUrlParser: true,
         useUnifiedTopology: true
