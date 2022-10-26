@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-deployment
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node
+  template:
+    metadata:
+      labels:
+        app: node
+    spec:
+      containers:
+        - name: node
+          image: karaborg/demo-login:5
+          env:
+            - name: MONGO_ADDRESS
+              value: "mongo-service.default"
+            - name: MONGO_DB_USERNAME
+              value: user
+            - name: MONGO_DB_PASSWORD
+              value: pass

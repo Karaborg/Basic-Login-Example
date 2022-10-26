@@ -40,3 +40,12 @@
   - `docker compose down -v`
   - Remove Volumes
     - `docker image prune -a`
+
+## Start With ***Kubernetes***
+
+- **To Start Application**
+  - `kubectl apply -f=./k8s/mongo-service.yaml -f=./k8s/mongo-deployment.yaml -f=./k8s/node-service.yaml -f=./k8s/node-deployment.yaml`
+- **To Stop Application**
+  - `kubectl delete -f=./k8s/mongo-service.yaml -f=./k8s/mongo-deployment.yaml -f=./k8s/node-service.yaml -f=./k8s/node-deployment.yaml`
+
+> Open the app with `minikube service node-service` command.
