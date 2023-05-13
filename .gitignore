@@ -5,7 +5,7 @@ node_modules
 .idea
 
 # env
-.env
+#.env
 
 # package-lock
 package-lock.json
