@@ -26,7 +26,7 @@ require('mongoose-cache').install(mongoose, cacheOptions);
 
 //var mongodb_connection_string = `mongodb://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@mongodb:27017/users?authSource=admin`
 
-var mongodb_connection_string = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@test.idaqf.mongodb.net/?retryWrites=true&w=majority`
+var mongodb_connection_string = `mongodb+srv://testUser:testPassword@test.idaqf.mongodb.net/?retryWrites=true&w=majority`
 
 var connectFunction = function () {
 
